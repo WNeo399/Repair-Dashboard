@@ -1,0 +1,78 @@
+.priceBrand{
+    display: flex;
+    margin-top: 20px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    font-size: 18px;
+    gap: 22px;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    // overflow-x: scroll;
+}
+
+.brandTitle{
+    width: max-content;
+    padding: 12px 6px;
+    // border: 1px solid black;
+    cursor: pointer;
+    text-align: center;
+    // white-space: nowrap;
+}
+
+.brandTitle.active{
+    font-weight: bold;
+}
+.priceTableWrap{
+    height: 0;
+    width: 100%;
+    flex-grow: 1;
+    overflow: scroll;
+}
+.priceTableWrap {
+    table {
+        border-collapse: separate; /* important for sticky borders */
+        border-spacing: 0;         /* removes gaps between cells */
+        width: 100%;
+        position: relative;
+      }
+    
+    thead{
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 3;
+    }
+    
+    th, td {
+        border: 1px solid #000; /* define your border */
+        padding: 8px;           /* optional for spacing inside cell */
+        white-space: nowrap;
+        text-align: center;
+    }
+    
+      /* Freeze the first column */
+    tbody th,
+    tbody td:first-child,
+    thead th:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      font-weight: bold;
+      background: #fff;
+    }
+    
+    tbody tr{
+        cursor: pointer;
+    }
+
+    tbody tr:hover td{
+        background: #dfe4ea;
+    }
+
+
+    /* Ensure the corner cell (header + first column) is above all */
+    thead th:first-child {
+      z-index: 2;
+    }
+}

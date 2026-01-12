@@ -37,6 +37,7 @@ export const Pages: CollectionConfig<'pages'> = {
     slug: true,
   },
   admin: {
+    hidden: true,
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) =>
@@ -52,6 +53,7 @@ export const Pages: CollectionConfig<'pages'> = {
         collection: 'pages',
         req,
       }),
+
     useAsTitle: 'title',
   },
   fields: [

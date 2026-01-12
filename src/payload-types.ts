@@ -67,6 +67,8 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    brands: Brand;
+    priceList: PriceList;
     pages: Page;
     posts: Post;
     media: Media;
@@ -89,6 +91,8 @@ export interface Config {
     };
   };
   collectionsSelect: {
+    brands: BrandsSelect<false> | BrandsSelect<true>;
+    priceList: PriceListSelect<false> | PriceListSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -149,6 +153,37 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands".
+ */
+export interface Brand {
+  id: string;
+  title?: string | null;
+  brand?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "priceList".
+ */
+export interface PriceList {
+  id: string;
+  brand?: (string | null) | Brand;
+  model?: string | null;
+  title: string;
+  priceList?:
+    | {
+        title?: string | null;
+        price?: number | null;
+        active?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -971,6 +1006,14 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
+        relationTo: 'brands';
+        value: string | Brand;
+      } | null)
+    | ({
+        relationTo: 'priceList';
+        value: string | PriceList;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: string | Page;
       } | null)
@@ -1051,6 +1094,35 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brands_select".
+ */
+export interface BrandsSelect<T extends boolean = true> {
+  title?: T;
+  brand?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "priceList_select".
+ */
+export interface PriceListSelect<T extends boolean = true> {
+  brand?: T;
+  model?: T;
+  title?: T;
+  priceList?:
+    | T
+    | {
+        title?: T;
+        price?: T;
+        active?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
